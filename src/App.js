@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App container py-3">
-      <Navbar collapsOnSelect bg="light" expand="md" className="mb-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
         <Navbar.Brand href="/" className="font-weight-bold text-muted">
           Scratch
         </Navbar.Brand>
