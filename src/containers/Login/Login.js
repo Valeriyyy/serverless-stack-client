@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../../libs/contextLib";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
+import { onError } from "../../libs/errorLib";
 import "./Login.css";
 
 export default function Login() {
@@ -25,7 +26,7 @@ export default function Login() {
       userHasAuthenticated(true);
       history.push("/");
     } catch (e) {
-      alert(e.message);
+      onError(e);
       setIsLoading(false);
     }
   }
