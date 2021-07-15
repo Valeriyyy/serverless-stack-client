@@ -20,7 +20,7 @@ Amplify.configure({
     bucket: config.s3.BUCKET,
     identityPoolId: config.cognito.IDENTITY_POOL_ID,
   },
-  Api: {
+  API: {
     endpoints: [
       {
         name: "notes",
