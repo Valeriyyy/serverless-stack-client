@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
-import { s3Upload } from "../libs/awsLib";
+import { s3Upload } from "../../libs/awsLib";
 import { onError } from "../../libs/errorLib";
 import { Form } from "react-bootstrap";
 import LoaderButton from "../../components/LoaderButton/LoaderButton";
@@ -53,13 +53,17 @@ export default function Notes() {
     file.current = event.target.files[0];
   };
 
-  const saveNote = (note) => {
+  const saveNote = async (note) => {
     return API.put("notes", `/notes/${id}`, {
       body: note,
     });
   };
 
-  const handleSubmit = (event) => {
+  const deleteNote = async () => {
+    return API.del("notes", `/notes/${id}`);
+  };
+
+  const handleSubmit = async (event) => {
     let attachment;
 
     event.preventDefault();
@@ -102,6 +106,14 @@ export default function Notes() {
     }
 
     setIsDeleting(true);
+
+    try {
+      await deleteNote();
+      history.push("/");
+    } catch (e) {
+      onError(e);
+      setIsDeleting(false);
+    }
   };
 
   return (
